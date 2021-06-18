@@ -26,10 +26,15 @@ class CellAdapter : PagingDataAdapter<Cell, RecyclerView.ViewHolder>(CELL_DIFF_U
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (getItem(position)!!.type) {
-            Cell.HEADER -> (holder as HeaderViewHolder).textView.text = "Header $position"
-            Cell.ITEM -> (holder as ItemViewHolder).textView.text = "Item $position"
+        val item = getItem(position)!!
+        when (item.type) {
+            Cell.HEADER -> (holder as HeaderViewHolder).textView.text = "Header ${item.value}"
+            Cell.ITEM -> (holder as ItemViewHolder).textView.text = "Item ${item.value}"
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position)!!.type
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -51,7 +56,8 @@ class CellAdapter : PagingDataAdapter<Cell, RecyclerView.ViewHolder>(CELL_DIFF_U
     }
 
     override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder, headerPosition: Int) {
-        (holder as HeaderViewHolder).textView.text = "Header $headerPosition"
+        val headerText = getItem(headerPosition)!!.value
+        (holder as HeaderViewHolder).textView.text = "Header $headerText"
     }
 
     override fun onCreateHeaderViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
