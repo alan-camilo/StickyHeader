@@ -1,7 +1,6 @@
 package com.shuhart.stickyheader.sample
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.Pager
@@ -12,11 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shuhart.stickyheader.StickyHeaderItemDecorator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -24,7 +19,6 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private val adapter = CellAdapter()
-    private val stateFlow = MutableStateFlow<PagingData<Cell>?>(null)
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,25 +28,29 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         with(recyclerView) {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@MainActivity,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
             adapter = this@MainActivity.adapter
         }
 
         val stickyDecorator = StickyHeaderItemDecorator(this.adapter)
         stickyDecorator.attachToRecyclerView(recyclerView)
-        lifecycleScope.launch {
-            stateFlow.collect {
-                it?.let { adapter.submitData(it) }
-            }
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launch { getData() }
+        lifecycleScope.launch {
+            getData().collectLatest {
+                it.let { adapter.submitData(it) }
+            }
+        }
     }
 
-    private suspend fun getData() {
+    private fun getData(): Flow<PagingData<Cell>> {
         val list = List(100) { index ->
             Cell.Item(index, null)
         }
@@ -81,6 +79,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }.collectLatest { stateFlow.value = it }
+            }
     }
 }
