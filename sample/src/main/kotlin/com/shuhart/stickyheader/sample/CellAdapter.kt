@@ -8,7 +8,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shuhart.stickyheader.StickyHeaderAdapter
-import java.lang.IllegalArgumentException
 
 class CellAdapter : PagingDataAdapter<Cell, RecyclerView.ViewHolder>(CELL_DIFF_UTIL),
     StickyHeaderAdapter {
@@ -48,7 +47,7 @@ class CellAdapter : PagingDataAdapter<Cell, RecyclerView.ViewHolder>(CELL_DIFF_U
 
     override fun getHeaderPositionForItem(itemPosition: Int): Int {
         val items: List<Cell> = snapshot().items
-        return when(val item = getItem(itemPosition)) {
+        return when (val item = getItem(itemPosition)) {
             is Cell.Header -> itemPosition
             is Cell.Item -> items.indexOf(item.header!!)
             else -> throw IllegalArgumentException("No item at this position")

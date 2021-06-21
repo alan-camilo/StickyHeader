@@ -1,6 +1,5 @@
 package com.shuhart.stickyheader.sample
 
-import android.app.Activity
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlin.math.min

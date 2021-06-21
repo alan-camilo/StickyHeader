@@ -53,7 +53,8 @@ class StickyHeaderItemDecorator(private val adapter: StickyHeaderAdapter) :
         if (topChildPosition == RecyclerView.NO_POSITION) {
             return
         }
-        var viewOverlappedByHeader: View? = getChildInContact(parent, currentStickyHolder.itemView.bottom)
+        var viewOverlappedByHeader: View? =
+            getChildInContact(parent, currentStickyHolder.itemView.bottom)
         if (viewOverlappedByHeader == null) {
             viewOverlappedByHeader = if (lastViewOverlappedByHeader != null) {
                 lastViewOverlappedByHeader
@@ -62,7 +63,8 @@ class StickyHeaderItemDecorator(private val adapter: StickyHeaderAdapter) :
             }
         }
         lastViewOverlappedByHeader = viewOverlappedByHeader
-        val overlappedByHeaderPosition: Int = parent.getChildAdapterPosition(viewOverlappedByHeader!!)
+        val overlappedByHeaderPosition: Int =
+            parent.getChildAdapterPosition(viewOverlappedByHeader!!)
         val overlappedHeaderPosition: Int
         val preOverlappedPosition: Int
         if (overlappedByHeaderPosition > 0) {
@@ -75,7 +77,10 @@ class StickyHeaderItemDecorator(private val adapter: StickyHeaderAdapter) :
         if (preOverlappedPosition == RecyclerView.NO_POSITION) {
             return
         }
-        if (preOverlappedPosition != overlappedHeaderPosition && shouldMoveHeader(viewOverlappedByHeader)) {
+        if (preOverlappedPosition != overlappedHeaderPosition && shouldMoveHeader(
+                viewOverlappedByHeader
+            )
+        ) {
             updateStickyHeader(topChildPosition)
             moveHeader(c, viewOverlappedByHeader)
         } else {
@@ -136,22 +141,30 @@ class StickyHeaderItemDecorator(private val adapter: StickyHeaderAdapter) :
             override fun onGlobalLayout() {
                 recyclerView?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
                 // Specs for parent (RecyclerView)
-                val widthSpec: Int = View.MeasureSpec.makeMeasureSpec(recyclerView!!.width, View.MeasureSpec.EXACTLY)
-                val heightSpec: Int = View.MeasureSpec.makeMeasureSpec(recyclerView!!.height, View.MeasureSpec.UNSPECIFIED)
+                val widthSpec: Int =
+                    View.MeasureSpec.makeMeasureSpec(recyclerView!!.width, View.MeasureSpec.EXACTLY)
+                val heightSpec: Int = View.MeasureSpec.makeMeasureSpec(
+                    recyclerView!!.height,
+                    View.MeasureSpec.UNSPECIFIED
+                )
 
                 // Specs for children (headers)
                 val childWidthSpec = ViewGroup.getChildMeasureSpec(
                     widthSpec,
                     recyclerView!!.paddingLeft + recyclerView!!.paddingRight,
-                    currentStickyHolder.itemView.layoutParams.width)
+                    currentStickyHolder.itemView.layoutParams.width
+                )
                 val childHeightSpec = ViewGroup.getChildMeasureSpec(
                     heightSpec,
                     recyclerView!!.paddingTop + recyclerView!!.paddingBottom,
-                    currentStickyHolder.itemView.layoutParams.height)
+                    currentStickyHolder.itemView.layoutParams.height
+                )
                 currentStickyHolder.itemView.measure(childWidthSpec, childHeightSpec)
-                currentStickyHolder.itemView.layout(0, 0,
+                currentStickyHolder.itemView.layout(
+                    0, 0,
                     currentStickyHolder.itemView.getMeasuredWidth(),
-                    currentStickyHolder.itemView.getMeasuredHeight())
+                    currentStickyHolder.itemView.getMeasuredHeight()
+                )
             }
         })
     }
