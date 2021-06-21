@@ -1,3 +1,9 @@
+# Why this fork?
+The original implementation has a `StickyAdapter` class which inherits from `RecyclerView.Adapter`, 
+despite not using any of the `RecyclerView.Adapter` functions. This choice prohibits using others 
+adapters, e.g. `PagingDataAdapter`. This fork has instead an interface named `StickyHeaderAdapter`, 
+along with a sample app using `PagingDataAdapter` from Paging 3.
+
 # StickyHeader
 
 The StickyHeader was created mainly because most popular libraries for sticky headers are too complicated or offer much more features than needed. Some of these libraries also break DiffUtils. For performance reason, a header view is created only once while view types and click listeners are not supported.
@@ -13,22 +19,20 @@ Usage
 2. Add `implementation 'com.github.shuhart:stickyheader:1.1.0` to the dependencies.
 3. Look into the sample for additional details on how to use and configure the library.
 
-An adapter that extends [StickyAdapter](https://github.com/shuhart/StickyHeader/blob/master/stickyheader/src/main/java/com/shuhart/stickyheader/StickyAdapter.java)  is necessary for the StickyHeaderItemDecorator that is used to create and bind sticky headers:
+An adapter that implements [StickyHeaderAdapter](stickyheader/src/main/kotlin/com/shuhart/stickyheader/StickyHeaderAdapter.kt) 
+is necessary for the StickyHeaderItemDecorator that is used to create and bind sticky headers:
 
-```java
-@Override
-public int getHeaderPositionForItem(int itemPosition) {
+```kotlin
+override fun getHeaderPositionForItem(itemPosition: Int): Int {
     // Return a position of a header that represents an item at adapter position.
     // For the header itself return the same itemPosition.
 }
 
-@Override
-public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int headerPosition) {
+override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder, headerPosition: Int) {
     // Update a header content here.
 }
 
-@Override
-public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+override fun onCreateHeaderViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
     // Create a ViewHolder for a header (called only once).
 }
  ```
@@ -36,9 +40,9 @@ public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
 
 Then, attach it to the RecyclerView:
 
-```java
-StickyHeaderItemDecorator decorator = new StickyHeaderItemDecorator(adapter);
-decorator.attachToRecyclerView(recyclerView);
+```kotlin
+val decorator = StickyHeaderItemDecorator(adapter)
+decorator.attachToRecyclerView(recyclerView)
 ```
 
 How it works
