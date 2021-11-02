@@ -1,4 +1,4 @@
-package com.shuhart.stickyheader.sample
+package com.alancamilo.stickyheader.sample
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

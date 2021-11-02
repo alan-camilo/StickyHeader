@@ -1,4 +1,4 @@
-package com.shuhart.stickyheader.sample
+package com.alancamilo.stickyheader.sample
 
 sealed class Cell(val type: Int, val value: Int) {
 

@@ -14,12 +14,11 @@ Also, by customizing this view via supplied adapter, a new sticky header will re
 
 Usage
 -----
-
-1. Add mavenCentral() to repositories block in the gradle file.
-2. Add `implementation 'com.github.shuhart:stickyheader:1.1.0` to the dependencies.
+1. Add ` maven { url "https://jitpack.io" }` to repositories block in the gradle file.
+2. Add `implementation 'com.github.alancamilo:stickyheader:2.0` to the dependencies.
 3. Look into the sample for additional details on how to use and configure the library.
 
-An adapter that implements [StickyHeaderAdapter](stickyheader/src/main/kotlin/com/shuhart/stickyheader/StickyHeaderAdapter.kt) 
+An adapter that implements [StickyHeaderAdapter](stickyheader/src/main/kotlin/com/alancamilo/stickyheader/StickyHeaderAdapter.kt) 
 is necessary for the StickyHeaderItemDecorator that is used to create and bind sticky headers:
 
 ```kotlin
@@ -52,6 +51,8 @@ How it works
 
 License
 =======
+
+    Modifications copyright 2021 Alan Herrera
 
     Copyright 2018 Bogdan Kornev.
 

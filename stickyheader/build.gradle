@@ -1,12 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-ext {
-    PUBLISH_GROUP_ID = 'com.github.shuhart'
-    PUBLISH_VERSION = '2.0.0'
-    PUBLISH_ARTIFACT_ID = 'stickyheader'
-}
-
 apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
 
 buildscript {
@@ -53,7 +47,7 @@ android {
 
 dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.5.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

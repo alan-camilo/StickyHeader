@@ -1,4 +1,4 @@
-package com.shuhart.stickyheader.sample
+package com.alancamilo.stickyheader.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,7 @@ import androidx.paging.insertSeparators
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.shuhart.stickyheader.StickyHeaderItemDecorator
+import com.alancamilo.stickyheader.StickyHeaderItemDecorator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map

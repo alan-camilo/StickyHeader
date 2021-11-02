@@ -1,4 +1,4 @@
-package com.shuhart.stickyheader
+package com.alancamilo.stickyheader
 
 import android.graphics.Canvas
 import android.view.View

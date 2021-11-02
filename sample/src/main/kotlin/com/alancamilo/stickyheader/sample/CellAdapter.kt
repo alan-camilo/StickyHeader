@@ -1,4 +1,4 @@
-package com.shuhart.stickyheader.sample
+package com.alancamilo.stickyheader.sample
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.shuhart.stickyheader.StickyHeaderAdapter
+import com.alancamilo.stickyheader.StickyHeaderAdapter
 
 class CellAdapter : PagingDataAdapter<Cell, RecyclerView.ViewHolder>(CELL_DIFF_UTIL),
     StickyHeaderAdapter {
